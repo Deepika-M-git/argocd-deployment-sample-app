@@ -1,0 +1,17 @@
+namespace: app
+
+backend:
+  image: backend:1.0
+  replicas: 1
+  port: 5000
+
+frontend:
+  image: frontend:1.2
+  replicas: 1
+  port: 80
+  host: poetry.com
+
+mongo:
+  image: mongo:6
+  port: 27017
+

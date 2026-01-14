@@ -1,0 +1,6 @@
+apiVersion: v2
+name: test-chart
+description: MERN app (frontend, backend, mongo)
+type: application
+version: 0.1.0
+appVersion: "1.1"
