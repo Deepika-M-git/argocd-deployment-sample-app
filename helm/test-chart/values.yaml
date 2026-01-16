@@ -9,7 +9,7 @@ frontend:
   image: frontend:1.2
   replicas: 1
   port: 80
-  host: poetry.com
+  host: sample.poetry.com
 
 mongo:
   image: mongo:6
