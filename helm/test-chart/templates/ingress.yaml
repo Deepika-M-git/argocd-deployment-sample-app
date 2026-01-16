@@ -1,34 +1,32 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-frontend
-  namespace: {{ .Values.namespace }}
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"  
+    argocd.argoproj.io/tracking-id: sample-app:networking.k8s.io/Ingress:app/sample-app-frontend
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+  name: sample-app-frontend
+  namespace: app
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - poetry.com
-      secretName: react-tls  
   rules:
     - host: poetry.com
       http:
         paths:
-          # Frontend
-          - path: /
-            pathType: Prefix
-            backend:
+          - backend:
               service:
-                name: {{ .Release.Name }}-frontend
+                name: sample-app-frontend
                 port:
-                  number: {{ .Values.frontend.port }}
-
-          # Backend API
-          - path: /api
+                  number: 80
+            path: /
             pathType: Prefix
-            backend:
+          - backend:
               service:
-                name: {{ .Release.Name }}-backend
+                name: sample-app-backend
                 port:
-                  number: {{ .Values.backend.port }}
+                  number: 5000
+            path: /api
+            pathType: Prefix
+  tls:
+    - hosts:
+        - poetry.com
+      secretName: react-tls
