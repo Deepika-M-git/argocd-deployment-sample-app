@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: poetry.com
+    - host: {{ .Values.frontend.host }}
       http:
         paths:
           - backend:
@@ -28,5 +28,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - poetry.com
+        - sample.poetry.com
       secretName: react-tls
